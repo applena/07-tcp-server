@@ -1,15 +1,13 @@
 ![CF](http://i.imgur.com/7v5ASc8.png) LAB
 =================================================
 
-## Project Name
+## Lab 07 - Chatroom TCC
 
-### Author: Student/Group Name
+### Author: Lena Eivy
 
 ### Links and Resources
-* [repo](http://xyz.com)
+* [repo](https://github.com/applena/07-tcp-server)
 * [travis](http://xyz.com)
-* [back-end](http://xyz.com)
-* [front-end](http://xyz.com)
 
 ### Modules
 #### `modulename.js`
@@ -24,7 +22,6 @@ Usage Notes or examples
 ### Setup
 #### `.env` requirements
 * `PORT` - Port Number
-* `MONGODB_URI` - URL to the running mongo instance/db
 
 #### Running the app
 * `npm start`
@@ -35,8 +32,6 @@ Usage Notes or examples
 
 #### Tests
 * How do you run tests?
+* `npm run test`
 * What assertions were made?
 * What assertions need to be / should be made?
-
-#### UML
-Link to an image of the UML for your application and response to events
