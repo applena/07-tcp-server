@@ -7,7 +7,7 @@
 
 ### Links and Resources
 * [repo](https://github.com/applena/07-tcp-server)
-* [travis](http://xyz.com)
+* [travis](https://travis-ci.com/applena/07-tcp-server.svg?branch=master)
 
 ### Modules
 #### `modulename.js`
