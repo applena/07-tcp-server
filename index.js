@@ -12,12 +12,14 @@ const port = process.env.PORT || 3001;
 const server = net.createServer();
 
 // modules
-const parse = require('./parse');
-const socketPool = require('./socketPool');
-const commands = require('./commands');
+const actions = require('./lib/actions');
+const parse = require('./lib/parse');
+const socketPool = require('./lib/socketPool');
+const commands = require('./lib/commands');
 
 /**
  * Creates a server that listens for a connection
+ * 
  * Assigns an id (a uuid), a nickname, and a socket and stores this information in the socketPool object
  * The socket listens for 'data' to be sent and takes a buffer of that data to call the dispatchActions with the socket id and buffer
  * 
@@ -32,8 +34,13 @@ server.on('connection', (socket) => {
     nickname: `User-${id}`,
     socket: socket,
   };
+  console.log(`${id} joined`);
   socket.on('data', (buffer) => dispatchAction(id, buffer));
+  socket.on('error', (error)=> {console.error();});
+  socket.on('close', (had_error) => {delete socketPool[id];});
 });
+
+
 
 
 /**
