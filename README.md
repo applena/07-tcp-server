@@ -7,31 +7,67 @@
 
 ### Links and Resources
 * [repo](https://github.com/applena/07-tcp-server)
-* [travis](http://xyz.com)
+* [travis](https://travis-ci.com/applena/07-tcp-server.svg?branch=master)
 
 ### Modules
-#### `modulename.js`
+#### `commands.js`
 ##### Exported Values and Methods
 
-###### `foo(thing) -> string`
-Usage Notes or examples
+###### `commands = {}`
+the command module exports an empty command object that holds the commands the user can enter
 
-###### `bar(array) -> array`
-Usage Notes or examples
+#### `socketPool.js`
+##### Exported Values and Methods
+
+###### `socketPool = {}`
+the socketPool module exports an empty command object that holds the socket connection
+
+#### `parse.js`
+##### Exported Values and Methods
+
+###### `parse(buffer) -> buffer`
+parse is given a buffer that it then turns into a string and breaks aprat that string to store different parts of it in different vaiables. It returns those variable.
+
+#### `actions`
+##### Exported Values and Methods
+
+###### `directory`
+holds all of the actions that a user can enter
+
+######`atAll.js`
+###### Exported Values and Methods
+
+####### `@all(data, id) -> string and number`
+sends a message to everyone currently connected to the chat room along with the userId of the person sending the message.
+
+######`atDm.js`
+###### Exported Values and Methods
+
+####### `@dm(data, id) -> string and number`
+sends a direct message to a certain user along with the userId of the person sending the message
+
+######`atList.js`
+###### Exported Values and Methods
+
+####### `@list(data, id) -> string and number`
+prints a list of nicknames of everyone who is currently connected to the chatroom
+
+######`atQuit.js`
+###### Exported Values and Methods
+
+####### `@quit(data, id) -> string and number`
+removes the socket connection and deletes the user from the socketPool
+
 
 ### Setup
 #### `.env` requirements
-* `PORT` - Port Number
+* `PORT` - Port Number 3001
 
 #### Running the app
-* `npm start`
-* Endpoint: `/foo/bar/`
-  * Returns a JSON object with abc in it.
-* Endpoint: `/bing/zing/`
-  * Returns a JSON object with xyz in it.
+* `npm i`
+* to join the chatroom:
+  * in the CLI: nc ip-address-of-server
 
 #### Tests
-* How do you run tests?
 * `npm run test`
-* What assertions were made?
-* What assertions need to be / should be made?
+
