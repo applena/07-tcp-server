@@ -12,10 +12,11 @@ const port = process.env.PORT || 3001;
 const server = net.createServer();
 
 // modules
-const actions = require('./lib/actions');
+require('./lib/actions');
 const parse = require('./lib/parse');
 const socketPool = require('./lib/socketPool');
-const commands = require('./lib/commands');
+const event = require('./lib/events');
+const User = require('./lib/User');
 
 /**
  * Creates a server that listens for a connection
@@ -27,21 +28,15 @@ const commands = require('./lib/commands');
  * @param {object} buffer The buffer data that the user sends
  * 
  */
+
 server.on('connection', (socket) => {
-  let id = uuid();
-  socketPool[id] = {
-    id:id,
-    nickname: `User-${id}`,
-    socket: socket,
-  };
-  console.log(`${id} joined`);
-  socket.on('data', (buffer) => dispatchAction(id, buffer));
+  let user = new User(socket);
+  socketPool[user.id] = user;
+
+  socket.on('data', (buffer) => dispatchAction(user.id, buffer));
   socket.on('error', (error)=> {console.error();});
-  socket.on('close', (had_error) => {delete socketPool[id];});
+  socket.on('close', (had_error) => {delete socketPool[user.id];});
 });
-
-
-
 
 /**
  * A function that takes a userID and buffer, parses that buffer data and does a check to see if the parsed buffer data and the typeof commands at the parsed buffer data is a function. If it is, it calls the commands function with the parsed buffer and user ID as parameters.
@@ -54,9 +49,7 @@ server.on('connection', (socket) => {
  */
 let dispatchAction = (userId, buffer) => {
   let entry = parse(buffer);
-  if ( entry && typeof commands[entry.command] === 'function' ) {
-    commands[entry.command](entry, userId);
-  }
+  event.emit(entry.command, entry, userId);
 };
 
 /**
