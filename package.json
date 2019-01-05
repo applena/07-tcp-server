@@ -1,15 +1,30 @@
 {
   "name": "class-06",
   "version": "1.0.0",
-  "description": "",
-  "main": "chatroom.js",
+  "description": "![CF](http://i.imgur.com/7v5ASc8.png) LAB =================================================",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint **/*.js",
+    "test": "jest --coverage --verbose",
+    "test-watch": "jest --watchAll --coverage --verbose"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "eslint": "5.11.1",
+    "jest": "23.6.0",
+    "nodemon": "1.18.9",
+    "require-directory": "2.1.1",
     "uuid": "^3.2.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/applena/07-tcp-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/applena/07-tcp-server/issues"
+  },
+  "homepage": "https://github.com/applena/07-tcp-server#readme"
 }
