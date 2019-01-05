@@ -33,7 +33,7 @@ server.on('connection', (socket) => {
   let user = new User(socket);
   socketPool[user.id] = user;
 
-  socket.on('data', (buffer) => dispatchAction(user.id, buffer));
+  socket.on('data', (buffer) => dispatchAction(user.id, buffer, socket));
   socket.on('error', (error)=> {console.error();});
   socket.on('close', (had_error) => {delete socketPool[user.id];});
 });
@@ -43,13 +43,13 @@ server.on('connection', (socket) => {
  * 
  * @param {number} userId A uuid number
  * @param {object} buffer buffer data sent from the user
- * @param {string} entry Parsed buffer data sent from the user
- * @param {number} userId a uuid number
+ * @param {object} socket the connectionn socket from the user
  * 
  */
-let dispatchAction = (userId, buffer) => {
+let dispatchAction = (userId, buffer, socket) => {
   let entry = parse(buffer);
-  event.emit(entry.command, entry, userId);
+  if(!entry){return;}//ignores empty returns
+  event.emit(entry.command, entry, userId, socket);
 };
 
 /**

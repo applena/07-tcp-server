@@ -65,8 +65,9 @@ removes the socket connection and deletes the user from the socketPool
 
 #### Running the app
 * `npm i`
-* to join the chatroom:
-  * in the CLI: nc ip-address-of-server
+* in one terminal run: node index.js 
+  * this will start your server
+* to join the chatroom, in a different terminal: nc localhost 3001
 
 #### Tests
 * `npm run test`
